@@ -3,9 +3,10 @@
     height: 82vh;
     width: 100vw;
 
-    background-color: lightseagreen;
+    background-color: beige;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
