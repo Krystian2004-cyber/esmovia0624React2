@@ -10,6 +10,7 @@ function CInput ({type, name, placeholder, design, emitFunction, errorCheck}) {
             placeholder={placeholder}
             className={design}
             onChange={(e)=>emitFunction(e)}
+            onBlur={(e)=>errorCheck(e)}
         />
     )
 }
