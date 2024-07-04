@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import CInput from "../../common/CInput/CInput";
 import "./Login.css";
 import checkE from "../../utils/errors";
+import { LoginMe } from "../../services/api-calls";
 
 function Login() {
   const [credentials, setCredentials] = useState({
-    email: "",
+    name: "",
     password: "",
   });
 
   const [credentialsErrors, setCredentialsErrors] = useState({
-    emailError: "",
+    nameError: "",
     passwordError: "",
   });
 
@@ -34,6 +35,13 @@ function Login() {
     }));
   };
 
+  const loginFunction = async () => {
+
+    LoginMe(credentials)
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+  };
+
   // useEffect(()=>{
 
   //     console.log(credentials)
@@ -43,23 +51,35 @@ function Login() {
   return (
     <div className="login-design">
       <CInput
-        type="email"
-        name="email"
+        type="text"
+        name="name"
         placeholder=""
-        design={`${credentialsErrors.emailError !== "" ? "error-input" : ""} basic-input`}
+        design={`${
+          credentialsErrors.nameError !== "" ? "error-input" : ""
+        } basic-input`}
         emitFunction={inputHandler}
         errorCheck={errorCheck}
       />
-      {credentialsErrors.emailError}
+      {credentialsErrors.nameError}
       <CInput
         type="password"
         name="password"
         placeholder=""
-        design={`${credentialsErrors.passwordError !== "" ? "error-input" : ""} basic-input`}
+        design={`${
+          credentialsErrors.passwordError !== "" ? "error-input" : ""
+        } basic-input`}
         emitFunction={inputHandler}
         errorCheck={errorCheck}
       />
       {credentialsErrors.passwordError}
+      {credentials.name !== "" &&
+        credentials.password !== "" &&
+        credentialsErrors.nameError === "" &&
+        credentialsErrors.passwordError === "" && (
+          <div className="login-button-design" onClick={loginFunction}>
+            Login me!
+          </div>
+        )}
     </div>
   );
 }

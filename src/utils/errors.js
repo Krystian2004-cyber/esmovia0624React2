@@ -1,7 +1,15 @@
 
 function checkE (type, value) {
 
-    switch(type.tolowerCase()){
+    switch(type){
+
+        case 'name':
+
+            if(value.length < 5){
+                return "Name must be at least of 5 characters"
+            } else {
+                return ""
+            }
 
         case 'email':
         case 'e-mail':
@@ -27,17 +35,18 @@ function checkE (type, value) {
         case 'password':
         case 'password2':
 
-            if(value.length < 8){
-                return "Write 8 characters at least"
+            if(value.length < 6){
+                return "Write 6 characters at least"
             } else {
 
                 //Checking the password format....
 
-                if (! /[\d()+-]/g.test(value) ) {
-                    return "Invalid password";
-                } else {
-                    return "";
-                }
+                // if (! /[\d()+-]/g.test(value) ) {
+                //     return "Invalid password";
+                // } else {
+                //     return "";
+                // }
+                return ""
             }
 
         default:
