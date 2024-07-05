@@ -1,10 +1,13 @@
-import { useState } from "react";
-import "./Home.css";
-import { useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { bringMovies } from "../../services/api-calls";
+import { myContext } from "../../app/context";
+import { useNavigate } from "react-router-dom";
+import "./Home.css";
 
 function Home() {
   const [movies, setMovies] = useState([]);
+  const {state, SetAuth} = useContext(myContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (movies.length === 0) {
@@ -15,13 +18,20 @@ function Home() {
           })
           .catch((error) => console.log(error));
       };
-      setTimeout(() => {
         getMovies();
-      }, 2000);
     }
 
     console.log(movies);
   }, [movies]);
+
+  useEffect(()=>{
+    console.log(state)
+  }, [state])
+
+  const selectMovie = (movie) => {
+    SetAuth("movie", movie)
+    navigate("/moviedetail")
+  }
 
   return (
     <div className="home-design">
