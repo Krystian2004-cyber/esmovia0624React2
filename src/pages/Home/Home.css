@@ -1,7 +1,7 @@
 
 .home-design {
 
-    height: 82vh;
+    min-height: 82vh;
     width: 100vw;
 
     background-color: beige;
@@ -9,4 +9,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+.card
+{
+    display: flex;
+    width:500px;
+    height:500px;
+    justify-content: center;
+    align-items: center;
+    border: 10px solid black;
+    margin:10px;
+}
+
+
+.movieCards{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap ;
+    align-items: center;
+    justify-content: center;
+}
+
+img
+{
+    height:100px;
+    width:100px;
 }

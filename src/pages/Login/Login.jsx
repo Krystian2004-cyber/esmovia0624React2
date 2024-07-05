@@ -12,8 +12,8 @@ function Login() {
   const {state, SetAuth} = useContext(myContext)
 
   const [credentials, setCredentials] = useState({
-    name: "",
-    password: "",
+    name: "emilys",
+    password: "emilyspass",
   });
 
   const [credentialsErrors, setCredentialsErrors] = useState({
@@ -67,6 +67,7 @@ function Login() {
         } basic-input`}
         emitFunction={inputHandler}
         errorCheck={errorCheck}
+        defaultValue='emilys'
       />
       {credentialsErrors.nameError}
       <CInput
@@ -78,16 +79,17 @@ function Login() {
         } basic-input`}
         emitFunction={inputHandler}
         errorCheck={errorCheck}
+         defaultValue='emilyspass'
       />
-      {credentialsErrors.passwordError}
+      {/* {credentialsErrors.passwordError}
       {credentials.name !== "" &&
         credentials.password !== "" &&
         credentialsErrors.nameError === "" &&
-        credentialsErrors.passwordError === "" && (
+        credentialsErrors.passwordError === "" && ( */}
           <div className="login-button-design" onClick={loginFunction}>
             Login me!
           </div>
-        )}
+        {/* )} */}
     </div>
   );
 }

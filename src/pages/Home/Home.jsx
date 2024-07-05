@@ -27,9 +27,14 @@ function Home() {
     <div className="home-design">
       {movies.length > 0 ? (
         //I have got the movies
-        <div>
+        <div className="movieCards">
           {movies.map((movie) => {
-            return <div key={movie.id}>{movie.title}</div>;
+            return <div className="card" key={movie.id}>{movie.title}   
+            <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt={movie.original_title
+} className="card-img" />
+
+<div> {movie.overview}</div>
+            </div>;
           })}
         </div>
       ) : (

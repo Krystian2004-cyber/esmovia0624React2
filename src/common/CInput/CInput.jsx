@@ -1,7 +1,7 @@
 
 import "./CInput.css"
 
-function CInput ({type, name, placeholder, design, emitFunction, errorCheck}) {
+function CInput ({type, name, placeholder, design, emitFunction, errorCheck,defaultValue}) {
 
     return(
         <input 
@@ -11,6 +11,7 @@ function CInput ({type, name, placeholder, design, emitFunction, errorCheck}) {
             className={design}
             onChange={(e)=>emitFunction(e)}
             onBlur={(e)=>errorCheck(e)}
+            defaultValue={defaultValue}
         />
     )
 }
