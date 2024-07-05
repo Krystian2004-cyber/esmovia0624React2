@@ -39,12 +39,7 @@ function Home() {
         //I have got the movies
         <div className="movieCards">
           {movies.map((movie) => {
-            return <div className="card" key={movie.id}>{movie.title}   
-            <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt={movie.original_title
-} className="card-img" />
-
-<div> {movie.overview}</div>
-            </div>;
+            return <div className="card" onClick={()=>selectMovie(movie)} key={movie.id}>{movie.title}</div>;
           })}
         </div>
       ) : (
