@@ -1,10 +1,16 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
+import { myContext } from "../../app/context";
 import CInput from "../../common/CInput/CInput";
 import "./Login.css";
 import checkE from "../../utils/errors";
 import { LoginMe } from "../../services/api-calls";
 
 function Login() {
+
+  //Instance of the context
+
+  const {state, SetAuth} = useContext(myContext)
+
   const [credentials, setCredentials] = useState({
     name: "",
     password: "",
@@ -38,7 +44,9 @@ function Login() {
   const loginFunction = async () => {
 
     LoginMe(credentials)
-        .then(res => console.log(res))
+        .then(res => {
+          SetAuth("token", res.token)
+        })
         .catch(error => console.log(error))
   };
 

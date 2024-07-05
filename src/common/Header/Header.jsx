@@ -1,19 +1,51 @@
 import Surfer from "../Surfer/Surfer";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
-import esmovia from "../../assets/esmovia.jpg"
+
+import { useContext, useEffect, useState } from "react";
+import { myContext } from "../../app/context";
+import { jwtDecode } from "jwt-decode";
+import esmovia from "../../assets/esmovia.jpg";
 
 function Header() {
+  //Instance of the context
 
-  const navigate = useNavigate()
+  const { state, SetAuth } = useContext(myContext);
+  const [decodedName, setDecodedName] = useState("")
+
+  useEffect(() => {
+    //This follows the value of state
+    if(state.auth.token !== ""){
+      //I will decipher the token....
+      let decoded = jwtDecode(state.auth.token)
+
+      setDecodedName(decoded?.firstName)
+
+    }
+  }, [state]);
+
+  const navigate = useNavigate();
   return (
     <div className="header-design">
-      <div onClick={()=>navigate("/")}><img className="logo-design" src={esmovia} alt="idk" /></div>
-      
+      <div onClick={() => navigate("/")}>
+        <img className="logo-design" src={esmovia} alt="idk" />
+      </div>
+
       <Surfer path={"/"} destiny={"Home"} />
-      <Surfer path={"/login"} destiny={"Login"} />
-      <Surfer path={"/profile"} destiny={"Profile"} />
-      <Surfer path={"/register"} destiny={"Register"} />
+
+      {state.auth.token === "" ? (
+        <div>
+          <Surfer path={"/login"} destiny={"Login"} />
+          <Surfer path={"/register"} destiny={"Register"} />
+        </div>
+      ) : (
+        <div>
+          <Surfer path={"/profile"} destiny={decodedName} />
+          <div onClick={()=>SetAuth("token", "")}>
+            <Surfer path={"/"} destiny={"log out"} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

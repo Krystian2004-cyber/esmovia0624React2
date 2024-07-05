@@ -3,6 +3,8 @@ const root = "https://dummyjson.com/"
 
 export async function LoginMe (credentials) {
 
+    console.log(credentials, "here are the credentials....")
+
     let rawData = await fetch(`${root}auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
