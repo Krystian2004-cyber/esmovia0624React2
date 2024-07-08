@@ -27,7 +27,7 @@ function Body() {
         }
 
         {/* Protected Routes */}
-        {state.auth.token !== "" ? (
+        {state.global.token !== "" ? (
           <Route path="/profile" element={<Profile />} />
         ) : null}
       </Routes>
