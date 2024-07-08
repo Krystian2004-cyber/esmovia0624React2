@@ -6,18 +6,20 @@ import { useContext, useEffect, useState } from "react";
 import { myContext } from "../../app/context";
 import { jwtDecode } from "jwt-decode";
 import esmovia from "../../assets/esmovia.jpg";
+import CInput from "../CInput/CInput";
 
 function Header() {
   //Instance of the context
 
   const { state, SetAuth } = useContext(myContext);
   const [decodedName, setDecodedName] = useState("")
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     //This follows the value of state
-    if(state.auth.token !== ""){
+    if(state.global.token !== ""){
       //I will decipher the token....
-      let decoded = jwtDecode(state.auth.token)
+      let decoded = jwtDecode(state.global.token)
 
       setDecodedName(decoded?.firstName)
 
@@ -25,15 +27,34 @@ function Header() {
   }, [state]);
 
   const navigate = useNavigate();
+
+  const inputHandler = (e) => {
+    setSearch(e.target.value)
+  }
+
+  useEffect(()=> {
+
+    SetAuth("search", search)
+  }, [search])
   return (
     <div className="header-design">
+
+      <CInput 
+        type="text"
+        name="search"
+        placeholder=""
+        design="basic-input"
+        emitFunction={inputHandler}
+        errorCheck={()=>{}}
+      />
+      
       <div onClick={() => navigate("/")}>
         <img className="logo-design" src={esmovia} alt="idk" />
       </div>
 
       <Surfer path={"/"} destiny={"Home"} />
 
-      {state.auth.token === "" ? (
+      {state.global.token === "" ? (
         <div>
           <Surfer path={"/login"} destiny={"Login"} />
           <Surfer path={"/register"} destiny={"Register"} />

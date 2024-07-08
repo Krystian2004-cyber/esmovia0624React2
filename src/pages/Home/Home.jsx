@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { bringMovies } from "../../services/api-calls";
+import { bringMovies, searchMovieCriteria } from "../../services/api-calls";
 import { myContext } from "../../app/context";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
@@ -25,7 +25,24 @@ function Home() {
   }, [movies]);
 
   useEffect(()=>{
-    console.log(state)
+    //The trick here consists in the fact that we are following the state with the useEffect,
+    //so every time we change the state we alter the movies data hook, not the state hook.
+
+    if(state !== ""){
+
+      const bringSearchedMovies = async () => {
+
+        searchMovieCriteria(state.global.search)
+          .then(res => {
+            setMovies(res.results)
+          })
+          .catch(error => console.log(error))
+
+      }
+
+      bringSearchedMovies()
+    }
+
   }, [state])
 
   const selectMovie = (movie) => {

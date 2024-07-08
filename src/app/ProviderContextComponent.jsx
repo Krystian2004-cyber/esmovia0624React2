@@ -3,9 +3,10 @@ import { myContext } from "./context";
 
 export const MyProvider = ({ children }) => {
   const [state, setState] = useState({
-    auth: {
+    global: {
       token: "",
       name: "",
+      search: "",
       movie: {}
     },
   });
@@ -13,8 +14,8 @@ export const MyProvider = ({ children }) => {
   const SetAuth = (target, payload) => {
     setState((prevState) => ({
       ...prevState,
-      auth: {
-        ...state.auth,
+      global: {
+        ...state.global,
         [target]: payload,
       },
     }));

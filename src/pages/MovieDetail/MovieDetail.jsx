@@ -12,7 +12,7 @@ function MovieDetail () {
     }, [state])
 
     return(
-        <div className="detail-design">{state.auth.movie?.title}</div>
+        <div className="detail-design">{state.global.movie?.title}</div>
     )
 }
 
